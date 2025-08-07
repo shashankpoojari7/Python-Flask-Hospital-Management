@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        MediCare -{% block title %}{% endblock title %}
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <h2 class = "welcome-text">
+                Welcome, 
+                {% if user.role == "Doctor" %}
+                    Dr. {{user.fullname|title}}
+                {% else %}
+                    {{user.fullname|title}}
+                {% endif %} 
+            </h2>
+            <ul>               
+                {% if user.role == "Patient" %}
+                    <li class="your-app">
+                        <a href="{{ url_for('patient', page_name='your-appointments') }}">Your Appointments</a>
+                    </li> 
+                    <li class="book-app">
+                        <a href="{{ url_for('patient', page_name='book-appointments') }}">Book Appointment</a>    
+                    </li>
+                    <li class="profile">
+                        <a href="{{ url_for('patient',page_name='profile')}}">Profile</a>
+                    </li>
+                {% else %}
+                    <li class="your-app">
+                        <a href="{{ url_for('doctor', page_name='your-appointments') }}">Your Appointments</a>
+                    </li>
+                    <li class="profile">
+                        <a href="{{ url_for('doctor',page_name='profile')}}">Profile</a>
+                    </li>
+                {% endif %}                   
+                
+            </ul>
+
+            <form id="logoutForm" action="{{ url_for('logout')}}" method="POST">
+                <button type="submit" class="logout">Logout</button>
+            </form>
+        </nav>
+    </header>
+    <main class="hero-section">
+        {% block body %}
+
+        {% endblock %}
+    </main>
+    <footer>
+        <p class="">&copy; 2025 MediCare. All rights reserved.</p>
+    </footer>
+    <script src= "{{ url_for('static', filename ='js/myScript.js') }}"></script>
+</body>
+</html>

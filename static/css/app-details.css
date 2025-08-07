@@ -1,0 +1,482 @@
+html {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: sans-serif;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+body{
+    min-height: 100vh;
+    width:100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(#b2f0ff, #4facfe);
+}
+
+.container {
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 100px;
+}
+
+.hero-title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #000000;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ccc;
+}
+
+.hero-title h2 {
+    font-size: 18px;
+    color: #017fb9;
+    margin-left: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.hero-title h1 {
+    flex: 1;
+    text-align: center;
+    font-size: 24px;
+    color: #ffffff;
+    margin: 0;
+}
+
+.hero-title h2.back + h1 {
+    margin-left: -2rem;
+}
+
+
+.details-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 30px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.container-head{
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+}
+
+
+.container-head h1{
+    font-size: 22px;
+    width: 100%;
+    text-align: center;
+    color: #333;
+}
+
+.image{
+    border: 1px solid #ccc;
+    padding: 1.2rem 1.2rem;
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-container{
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.image img{
+    width: 230px;
+    object-fit: contain;
+}
+
+.container-body{
+    gap:15px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.appointment-details{
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 55%;
+    padding: 1.5rem 1.4rem;
+    border-radius: 20px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+.appointment-row{
+    display: flex;
+    margin-bottom: 13px;
+}
+
+.appointment-details .label{
+    width: 200px;
+    font-weight: bold;
+    color: #333;
+}
+
+.appointment-row .value{
+    color: #555;
+    flex: 1;
+}
+
+.appointment-reason {
+    width: 100%;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ccc;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #212529;
+}
+
+.appointment-reason-box {
+    background-color: #eaf7e8;
+    padding: 1rem 1.25rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #212529;
+    font-weight: 500;
+}
+
+
+.prescription {
+    width: 100%;
+    padding: 1.5rem;
+    background-color: #fefefe;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    margin-inline: auto;
+}
+
+.prescription form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.prescription label {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.prescription textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: vertical;
+    font-size: 1rem;
+}
+
+.prescription button {
+    align-self: flex-start;
+    background-color: #0d6efd;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.prescription button:hover {
+    background-color: #0b5ed7;
+}
+
+
+.prescription-display h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #212529;
+}
+
+.prescribed-text {
+    white-space: pre-wrap;
+    font-size: 1rem;
+    color: #212529;
+    background: #fff;
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+.not-given {
+    background-color: #e8f5e9;          
+    color: #000000;                 
+    padding: 1rem 1.25rem;
+    margin-top: 10px;     
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 15px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.prescription-provided {
+    background-color: #e8f5e9;          
+    color: #000000;                 
+    padding: 1rem 1.25rem;
+    margin-top: 10px;     
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
+
+.app-cancel-btn{
+    width: 100%;
+    display: flex;
+    gap:10px;
+}
+
+.app-cancel-btn form{
+    width: 100%;
+}
+
+.app-cancel-btn button{
+    width: 100%;
+    padding: 15px;
+    font-size: large;
+    text-transform: uppercase;
+    word-spacing: 5px;
+    letter-spacing: 2px;
+    border: none;
+}
+
+.red {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.red :hover{
+    background-color: #d32f2f;
+}
+
+.green {
+    background: linear-gradient(135deg, #059669, #047857);
+    color: white;
+    border: 2px solid transparent;
+}
+
+.green:hover {
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Popup css code*/
+/* Overlay (dark background) */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.2s, opacity 0.2s;
+    z-index: 999;
+}
+
+
+.popup-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    max-width: 90%;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1000;
+    transition: opacity 0.1 ease, transform 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Show class triggers visibility */
+.popup-overlay.show,
+.popup-box.show {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+.popup-box.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Popup content styling */
+.popup-box p {
+    margin: 0 0 25px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.popup-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Button container for side-by-side layout */
+.popup-box .button-container {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+/* Enhanced button styling */
+.popup-box .app-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.popup-box .app-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.popup-box .app-btn:active {
+    transform: translateY(0);
+}
+
+/* Green button (Yes, Mark Completed) */
+.popup-box .app-btn.green {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: 2px solid transparent;
+}
+
+.popup-box .app-btn.green:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Cancel button */
+.popup-box .app-btn.cancel {
+    background: #f8f9fa;
+    color: #6b7280;
+    border: 2px solid #e5e7eb;
+}
+
+.popup-box .app-btn.cancel:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+    color: #4b5563;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes popupSlideIn {
+    from {
+        transform: translate(-50%, -60%) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+.popup-box.show {
+    animation: popupSlideIn 0.3s ease-out;
+}
+
+/* Notification */
+.container .notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 360px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 400;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    animation: pop 0.5s ease-in-out;
+}
+
+.container .error {
+    background-color: rgba(255, 0, 25, 0.727); 
+    border-left: 4px solid #ce2c3c;
+    color: #fff;
+}
+
+.container .warning {
+    background-color: rgba(255, 193, 7, 0.85);
+    border-left: 4px solid #e6a800;           
+    color: #212529;                       
+}
+
+.container .success{
+    background-color: rgba(0, 255, 0, 0.727); 
+    border-left: 4px solid #28a745;
+    color: #000;
+}
+
+/* Notifiction Animation */
+@keyframes pop {
+    from {
+        transform: translateX(500px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

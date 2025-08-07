@@ -1,0 +1,39 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# Flask instance & config
+instance/
+*.db
+*.sqlite3
+
+# Environment variables
+.env
+
+# VS Code / PyCharm / IDE settings
+.vscode/
+.idea/
+*.iml
+
+# Test cache
+.pytest_cache/
+.tox/
+.coverage
+coverage.xml
+htmlcov/
+
+# Log files
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Migrations (optional)
+migrations/

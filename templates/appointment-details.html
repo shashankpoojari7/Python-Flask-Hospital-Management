@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare - Appointment Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app-details.css') }}">
+</head>
+<body>
+    <!-- Logic part -->
+    {% set is_patient = session.get('role') == 'Patient' %}
+    {% set user_obj = appointment.doctor if is_patient else appointment.patient %}
+    {% set alt = user_obj.fullname + "'s profile picture" %}
+    {% set name = 'Doctor' if is_patient else 'Patient' %}
+    {% set isPrescriptionGiven = false %}
+    {% set flags = namespace(isPrescriptionGiven=false) %}
+
+    {% for pres in prescription %}
+        {% if pres.appointment_id == appointment.id %}
+            {% set flags.isPrescriptionGiven = true %}
+        {% endif %}
+    {% endfor %}
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true)%}            
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class ="notification {{category}}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}               
+        {% endwith %}
+        <div class="popup-overlay" id="popupOverlay" onclick="hidePopup()"></div>
+            <div class="popup-box" id="popupCompletedBox">
+                <form method="post" action="{{ url_for('mark_completed', id=appointment.id) }}">
+                    <p>Doctor, are you sure you’ve completed the treatment?</p>
+                    <button type="submit" class="app-btn green">Yes, Mark Completed</button>
+                    <button type="button" class="app-btn cancel" onclick="hidePopup()">Cancel</button>
+                </form>
+            </div>
+            <div class="popup-box" id="popupCancelBox">
+                <form method="post" action="{{ url_for('cancel_appointment', id=appointment.id) }}">
+                    <p>Are you sure you want to cancel your appointment?</p>
+                    <button type="submit" class="app-btn red">Yes, Cancel Appointment</button>
+                    <button type="button" class="app-btn cancel" onclick="hidePopup()">No, Go Back</button>
+                </form>
+            </div>
+            <div class="popup-box" id="popupDeleteBox">
+                <form method="post" action="{{ url_for('delete_appointment', id=appointment.id) }}">
+                    <p>Are you sure you want to delete your appointment?</p>
+                    <button type="submit" class="app-btn red">Yes, Delete Appointment</button>
+                    <button type="button" class="app-btn cancel" onclick="hidePopup()">No, Keep It</button>
+                </form>
+            </div>      
+
+        <div class="hero-title">
+            <a href="javascript:history.back()"><h2 class="back">&lt; Back</h2></a>
+            <h1>Appointment Details</h1>
+        </div>
+
+        <div class ="details-container">
+            <div class="container-head">  
+                <h1>{{name}}  Details</h1>
+            </div>
+            <div class="container-body">
+                <div class="image">                           
+                    <div class="image-container">
+                        <img src="{{ user_obj.image_filename or url_for('static', filename='images/no-profile.png') }}" alt="{{alt}}">
+                    </div>
+                </div>
+                <div class="appointment-details">      
+                    <div class="appointment-row">
+                        <span class="label">Name:</span>
+                        <span class="value">{{ user_obj.fullname }}</span>
+                    </div>
+                    <div class="appointment-row">
+                        <span class="label">Email:</span>
+                        <span class="value">{{ user_obj.email }}</span>
+                    </div>
+                    <div class="appointment-row">
+                        <span class="label">Phone:</span>
+                        <span class="value">{{ user_obj.phone }}</span>
+                    </div>
+                    <div class="appointment-row">
+                        <span class="label">Gender:</span>
+                        <span class="value">{{ user_obj.gender }}</span>
+                    </div>
+                    <div class="appointment-row">
+                        <span class="label">Address:</span>
+                        <span class="value">{{ user_obj.address }}</span>
+                    </div>
+                    <div class="appointment-row">
+                        <span class="label">Blood Group:</span>
+                        <span class="value">{{ user_obj.blood_group }}</span>
+                    </div>
+
+                    <div class="appointment-row">
+                        <span class="label">Emergency Contact:</span>
+                        <span class="value">{{ user_obj.emergency_contact }}</span>
+                    </div>
+
+                    {% if user_obj.role == 'Doctor' %}
+                        <div class="appointment-row">
+                        <span class="label">Specialization:</span>
+                        <span class="value">{{ user_obj.doctor_profile.specialization }}</span>
+                        </div>
+
+                        <div class="appointment-row">
+                        <span class="label">Qualification:</span>
+                        <span class="value">{{ user_obj.doctor_profile.qualification }}</span>
+                        </div>
+
+                        <div class="appointment-row">
+                        <span class="label">Experience:</span>
+                        <span class="value">{{ user_obj.doctor_profile.experience }} years</span>
+                        </div>
+
+                        <div class="appointment-row">
+                        <span class="label">License Number:</span>
+                        <span class="value">{{ user_obj.doctor_profile.license_number }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="appointment-reason">
+            <h3 class="section-title">Appointment reason</h3>
+            <div class="appointment-reason-box">
+                {{ appointment.appointment_details }}
+            </div>
+        </div>
+
+        <div class="prescription">
+            {% if not is_patient %}
+                
+                    {% if not flags.isPrescriptionGiven %}
+                    <form method="POST" action="{{ url_for('add_prescription', id=appointment.id) }}">
+                        <label for="prescription">Write Prescription</label>
+                        <textarea id="prescription" name="prescription" required rows="3" placeholder="Enter medication, dosage, and instructions...">{{ appointment.prescription or '' }}</textarea>
+                        <button type="submit">Submit Prescription</button>
+                    </form>
+                    {% else %}
+                        <p class="prescription-provided">Prescription has been issued for this appointment.</p>
+                    {% endif %}
+                
+            {% else %}
+            <div class="prescription-display">
+                <h3>Prescription</h3>
+                {% set ns = namespace(show_prescription=true) %}
+                {% for pres in prescription %}
+                    {% if pres.patient_id == session['id'] and pres.appointment_id == appointment.id %}
+                        <p class="prescribed-text">{{ pres.prescriptions }}</p>
+                        {% set ns.show_prescription = false %}
+                    {% endif %}
+                {% endfor %}
+                {% if ns.show_prescription %}
+                    <p class="not-given">Not yet given by doctor</p>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        
+        {% if is_patient %}
+            <div class="app-cancel-btn ">
+                {% if appointment.status == "Completed" %}
+                    <button id="app-btn" class="app-btn red" onclick="showDeletePopup()">Delete Appointment</button>
+                {% else %}
+                    <button id="app-btn" class="app-btn red" onclick="showCancelPopup()" >Cancel Appointment</button>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="app-cancel-btn">
+                <button id="profile_btn" class="app-btn green" onclick="showCompletedPopup()">Mark as Completed</button>
+            </div>
+        {% endif %}
+            
+    </div>
+    <script src= "{{ url_for('static', filename ='js/myScript.js') }}"></script>
+</body>
+</html>

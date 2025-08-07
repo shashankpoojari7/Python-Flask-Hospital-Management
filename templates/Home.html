@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare Hospital - Advanced Healthcare Management</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-hospital-alt"></i>
+                <span>MediCare</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#services" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-auth">
+                <a href="{{ url_for('login') }}" class="btn-login">Login</a>
+                <a href="{{ url_for('register') }}" class="btn-register">Register</a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Advanced Healthcare Management System</h1>
+                <p class="hero-subtitle">Streamline your hospital operations with our comprehensive management solution. From patient records to staff scheduling, we've got you covered.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="openModal('registerModal')">Get Started</button>
+                    <button class="btn-secondary">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hospital Management">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="services" class="features">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Patient Management</h3>
+                    <p>Comprehensive patient records, appointments, and medical history tracking.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Appointment Scheduling</h3>
+                    <p>Efficient appointment booking and management system for patients and staff.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-pills"></i>
+                    <h3>Inventory Management</h3>
+                    <p>Track medical supplies, pharmaceuticals, and equipment efficiently.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Analytics & Reports</h3>
+                    <p>Detailed insights and reports for better decision making.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Staff Management</h3>
+                    <p>Manage staff schedules, roles, and responsibilities effectively.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>Billing System</h3>
+                    <p>Automated billing and payment processing for patients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>5000+</h3>
+                    <p>Patients Served</p>
+                </div>
+                <div class="stat-item">
+                    <h3>200+</h3>
+                    <p>Medical Staff</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>Departments</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Support Available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id ="contact">
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <div class="footer-logo">
+                            <i class="fas fa-hospital-alt"></i>
+                            <span>MediCare</span>
+                        </div>
+                        <p>Advanced healthcare management system providing comprehensive solutions for modern hospitals.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#doctors">Doctors</a></li>
+                            <li><a href="#about">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Patient Management</a></li>
+                            <li><a href="#">Appointment Booking</a></li>
+                            <li><a href="#">Medical Records</a></li>
+                            <li><a href="#">Billing System</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact Info</h3>
+                        <div class="contact-info">
+                            <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                            <p><i class="fas fa-envelope"></i> info@medicare.com</p>
+                            <p><i class="fas fa-map-marker-alt"></i> 123 Healthcare St, Medical City</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 MediCare Hospital Management System. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

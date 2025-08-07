@@ -1,0 +1,61 @@
+{% extends "Main.html" %}
+
+{% block title %}
+    Your Appointments
+{% endblock title %}
+
+
+{% block body %}
+<div class="full-screen"><div class="loader-circle-2"></div></div>
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true)%}            
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class ="notification {{category}}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}               
+    {% endwith %}
+    <div class="container-head">
+        <h2>Your Appointments</h2>
+    </div>
+    <div class="container-body">
+        {% if appointments  %}        
+        {% for appt in appointments %}  
+            
+            {% if user.role == 'Doctor' %}
+                {% set target_id = appt.patient_id %}
+            {% else %}
+                {% set target_id = appt.doctor_id %}
+            {% endif %}    
+            <a href="{{ url_for('appointment_details', id=appt.id) }}">
+                <div class="container-appointments" data-status ={{appt.status}}>
+                    <div class="appointment-row">
+                        <span class="label">                    
+                            {% if user.role == 'Patient' %}
+                                Doctor Name
+                            {% else %}
+                                Patient Name
+                            {% endif %}     
+                        </span>
+                        <span class="value">
+                            {% if user.role == 'Patient' %}
+                                {{appt.doctor.fullname}}
+                            {% else %}
+                                {{appt.patient.fullname}}
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div class="appointment-row">
+                        <span class="label">Appointment date    </span>
+                        <span class="value">{{appt.appointment_date.strftime('%d-%m-%Y')}}</span>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        {% else %}
+            <div class="no-appointment">You don’t have any appointments scheduled.</div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

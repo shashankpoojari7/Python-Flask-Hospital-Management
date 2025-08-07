@@ -1,0 +1,42 @@
+{% extends "Main.html" %}
+
+{% block title %}
+    Book Appointments
+{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true)%}            
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class ="notification {{category}}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}               
+    {% endwith %}
+    <div class="full-screen"><div class="loader-circle-2"></div></div>
+    <div class="appointment-form">
+        <h2>Book Appointment</h2>
+        <form method="post" action="/patient/dashboard/create-appointment">
+            <h3>
+                <center>Patient Details</center>
+            </h3>
+            <select name="doctor" id="doctor" required>
+                <option value="">--Select Doctor--</option>
+                
+                {% if doctor %}
+                    {% for doc in doctor %}
+                        <option value="{{doc.id}}">{{doc.fullname}} - {{doc.doctor_profile.specialization}}</option>
+                    {% endfor %}
+                {% endif %}
+                    
+            </select>
+            <input type="date" name="appointment_date" required>
+            <textarea name="appointment_details" placeholder="Reason for Appointment" rows = "3" required></textarea>
+            <button type="submit">Book Appointment</button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

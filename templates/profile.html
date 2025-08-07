@@ -1,0 +1,120 @@
+{% extends 'Main.html' %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true)%}            
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class ="notification {{category}}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}               
+    {% endwith %}
+    <div class="full-screen"><div class="loader-circle-2"></div></div>
+    <div class="profile_picture_update_bg hide">
+        <div class ="profile_picture_update">
+            <div class = "x">&times;</div>
+            <h2>Update your profile picture</h2>
+            <form action="/upload" method="POST" enctype="multipart/form-data" name ="form">
+                <input type="file" name="profile_picture" accept="image/*" required>
+                {% if user.image_filename %}
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="url" value="{{ user.image_filename }}">
+                {% endif %}
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+    <div class="profile-container">
+        <div class="profile-image">
+            <div class="image">
+                <img src="{{ user.image_filename if user.image_filename else url_for('static', filename='images/no-profile.png') }}"alt="Profile Photo">
+            </div>
+            <div class="edit">
+                <button id ="edit_profile">Edit profile photo</button>
+            </div>
+        </div>
+        <div class="profile-details">
+            <div class="detail-row">
+                <span class="label">Name:</span>
+                <span class="value">
+                    {% if user.role == "Doctor" %}Dr. {% endif %}
+                    {{ user.fullname or "Not Provided" }}
+                </span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Email:</span>
+                <span class="value">{{ user.email or "Not Provided" }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Phone:</span>
+                <span class="value">{{ user.phone or "Not Provided" }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Gender:</span>
+                <span class="value">{{ user.gender or "Not Provided" }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Date of Birth:</span>
+                <span class="value">{{ user.date_of_birth.strftime('%d-%m-%Y') if user.date_of_birth else "Not Provided" }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Address:</span>
+                <span class="value">{{ user.address or "Not Provided" }}</span>
+            </div>
+
+            {% if user.role == "Doctor" %}
+                <div class="detail-row">
+                    <span class="label">Specialization:</span>
+                    <span class="value">{{ user.doctor_profile.specialization }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Qualification:</span>
+                    <span class="value">{{ user.doctor_profile.qualification }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Experience:</span>
+                    <span class="value">{{ user.doctor_profile.experience }} years</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">License Number:</span>
+                    <span class="value">{{ user.doctor_profile.license_number }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Hospital/Clinic:</span>
+                    <span class="value">{{ user.doctor_profile.hospital_name }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Bio:</span>
+                    <span class="value">{{ user.doctor_profile.bio }}</span>
+                </div>
+            {% else %}
+                <div class="detail-row">
+                    <span class="label">Blood Group:</span>
+                    <span class="value">{{ user.blood_group }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Emergency Contact:</span>
+                    <span class="value">{{ user.emergency_contact }}</span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

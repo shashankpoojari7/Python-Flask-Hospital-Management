@@ -1,0 +1,200 @@
+* ,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(#b2f0ff, #4facfe);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        position: relative;
+    }
+    .login-container {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        width: 500px;
+        animation: fadeIn 1s ease;
+    }
+    .login-container h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #007bff;
+        font-weight: 600;
+    }
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        width: 100%;
+        padding: 12px 15px;
+        margin: 10px 0 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border-color 0.3s;
+    }
+    .login-container input[type="text"]:focus,
+    .login-container input[type="password"]:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+    .login-container button {
+        width: 100%;
+        padding: 14px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        transition: background-color 0.3s;
+    }
+    .login-container button:hover {
+        background-color: #0056b3;
+    }
+    .login-container p {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+    .login-container a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .login-container a:hover {
+        text-decoration: underline;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    .error {
+        margin: 10px 0;
+        padding: 0;
+        color: red;
+        font-size: 1em;
+        text-align: center;
+    }
+    input:invalid {
+        border-color: red;
+    }
+
+
+    .loader-circle-2 {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+}
+.loader-circle-2:before,
+.loader-circle-2:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 50%;
+}
+.loader-circle-2:before {
+    width: 70px;
+    height: 70px;
+    border-bottom-color: #ff0000;
+    border-right-color: #ff0000;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    animation: loader-circle-2-animation-2 1s linear infinite;
+}
+.loader-circle-2:after {
+    width: 40px;
+    height: 40px;
+    border-bottom-color: #000000;
+    border-right-color: #000000;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    top: 22%;
+    left: 22%;
+    animation: loader-circle-2-animation 0.85s linear  infinite;
+}
+@keyframes loader-circle-2-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+@keyframes loader-circle-2-animation-2 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.full-screen {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100%;
+    background: transparent;
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 360px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 400;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    animation: pop 0.5s ease-in-out;
+}
+
+.error {
+    background-color: rgba(255, 0, 25, 0.727); 
+    border-left: 4px solid #ce2c3c;
+    color: #fff;
+}
+
+.warning {
+    background-color: rgba(255, 193, 7, 0.85);
+    border-left: 4px solid #e6a800;           
+    color: #212529;                       
+}
+
+.success{
+    background-color: rgba(0, 255, 0, 0.727); 
+    border-left: 4px solid #28a745;
+    color: #000;
+}
+
+/* Notifiction Animation */
+@keyframes pop {
+    from {
+        transform: translateX(500px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
